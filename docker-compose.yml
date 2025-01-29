@@ -1,0 +1,79 @@
+services:
+    api:
+        build:
+            context: api/docker
+            dockerfile: development/nginx/Dockerfile
+        container_name: api
+        ports:
+            - "8080:8080"
+        volumes:
+            - ./api:/app
+        networks:
+            - api-net
+
+    api-php-fpm:
+        build:
+            context: api/docker
+            dockerfile: development/php-fpm/Dockerfile
+        container_name: api-php-fpm
+        environment:
+            APP_ENV: dev
+            APP_DEBUG: 1
+            PHP_IDE_CONFIG: serverName=API
+            DB_HOST: api-postgres
+            DB_USER: app
+            DB_PASSWORD_FILE: /run/secrets/api_db_password
+            DB_NAME: app
+        ports:
+            - "9000:9000"
+        volumes:
+            - ./api:/app
+        secrets:
+            - api_db_password
+        networks:
+            - api-net
+
+    api-php-cli:
+        build:
+            context: api/docker
+            dockerfile: development/php-cli/Dockerfile
+        container_name: api-php-cli
+        environment:
+            APP_ENV: dev
+            APP_DEBUG: 1
+            DB_HOST: api-postgres
+            DB_USER: app
+            DB_PASSWORD_FILE: /run/secrets/api_db_password
+            DB_NAME: app
+        volumes:
+            - ./api:/app
+        secrets:
+            - api_db_password
+        networks:
+            - api-net
+
+    api-postgres:
+        image: postgres:15.2-alpine
+        container_name: api-postgres
+        environment:
+            POSTGRES_USER: app
+            POSTGRES_PASSWORD_FILE: /run/secrets/api_db_password
+            POSTGRES_DB: app
+        secrets:
+            - api_db_password
+        volumes:
+            - api-postgres:/var/lib/postgresql/data
+        ports:
+            - "5432:5432"
+        networks:
+            - api-net
+
+secrets:
+    api_db_password:
+        file: ./docker/development/secrets/api_db_password
+
+volumes:
+    api-postgres:
+
+networks:
+    api-net:

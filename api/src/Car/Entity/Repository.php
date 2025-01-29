@@ -1,0 +1,37 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Car\Entity;
+
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityRepository;
+use DomainException;
+
+final class Repository
+{
+    private EntityRepository $repo;
+
+    private EntityManagerInterface $em;
+
+    public function __construct(EntityManagerInterface $em)
+    {
+        $this->em   = $em;
+        $this->repo = $em->getRepository(Credit::class);
+    }
+
+    public function get(int $id): Credit
+    {
+        $car = $this->repo->find($id);
+        if ($car === null) {
+            throw new DomainException('Car is not found.');
+        }
+
+        return $car;
+    }
+
+    public function findAll(): array
+    {
+        return $this->repo->findAll();
+    }
+}
