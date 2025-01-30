@@ -16,8 +16,7 @@ final class Handler
         private readonly LoanRepository $loanRepository,
         private readonly CreditRepository $creditRepository,
         private readonly CarRepository $carRepository
-    ) {
-    }
+    ) {}
 
     public function handle(Command $command): void
     {
@@ -27,8 +26,7 @@ final class Handler
             $this->carRepository->get($command->carId),
             $this->creditRepository->get($command->programId),
             $command->initialPayment,
-            $command->loanTerm,
-
+            $command->loanTerm
         );
 
         $this->loanRepository->save($loan);

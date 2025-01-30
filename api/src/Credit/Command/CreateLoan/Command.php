@@ -11,6 +11,5 @@ final class Command
         public readonly int $programId,
         public readonly int $initialPayment,
         public readonly int $loanTerm,
-    ) {
-    }
+    ) {}
 }

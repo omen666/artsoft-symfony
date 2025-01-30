@@ -58,7 +58,9 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
-        ]
+        ],
+        "php-cs-fixer": "php-cs-fixer --config=.php-cs-fixer.php --allow-risky=yes",
+        "psalm": "psalm --config=psalm.xml"
     },
     "conflict": {
         "symfony/symfony": "*"
@@ -70,6 +72,9 @@
         }
     },
     "require-dev": {
-        "symfony/maker-bundle": "^1.62"
+        "friendsofphp/php-cs-fixer": "^3.68",
+        "psalm/plugin-phpunit": "^0.19.2",
+        "symfony/maker-bundle": "^1.62",
+        "vimeo/psalm": "^6.0"
     }
 }

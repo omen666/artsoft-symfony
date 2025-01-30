@@ -22,9 +22,9 @@ final class Car
 
     #[ORM\ManyToOne(targetEntity: Model::class, inversedBy: 'cars')]
     private Model $model;
-    #[ORM\Column(type: 'integer')]
-    private int    $price;
 
+    #[ORM\Column(type: 'integer')]
+    private int $price;
 
     public function __construct(
         int $id,

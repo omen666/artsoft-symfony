@@ -6,7 +6,7 @@ namespace App\Car\Query\FindAll;
 
 use App\Common\BaseCollection;
 
-class Collection extends BaseCollection
+final class Collection extends BaseCollection
 {
     public function add(Item $car): void
     {

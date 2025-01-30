@@ -9,9 +9,7 @@ use JsonSerializable;
 
 final class Item implements JsonSerializable
 {
-    public function __construct(private readonly Car $car)
-    {
-    }
+    public function __construct(private readonly Car $car) {}
 
     public function getId(): int
     {

@@ -9,9 +9,7 @@ use JsonSerializable;
 
 final class Item implements JsonSerializable
 {
-    public function __construct(private readonly Credit $credit,private readonly int $monthlyPayment)
-    {
-    }
+    public function __construct(private readonly Credit $credit, private readonly int $monthlyPayment) {}
 
     public function jsonSerialize(): array
     {

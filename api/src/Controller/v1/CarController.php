@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\v1;
 
 use App\Car\Query\FindAll\Fetcher as FindAllFetcher;
@@ -10,8 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-
-class CarController extends AbstractController
+final class CarController extends AbstractController
 {
     #[Route('/api/v1/cars', methods: ['GET'])]
     public function cars(FindAllFetcher $fetcher): Response

@@ -12,11 +12,8 @@ final class Repository
 {
     private EntityRepository $repo;
 
-    private EntityManagerInterface $em;
-
     public function __construct(EntityManagerInterface $em)
     {
-        $this->em   = $em;
         $this->repo = $em->getRepository(Car::class);
     }
 

@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace App\Common;
 
 use Countable;
+use DomainException;
 use Iterator;
 use JsonSerializable;
 
 abstract class BaseCollection implements Iterator, Countable, JsonSerializable
 {
-
     protected array $collection = [];
 
     final public function next(): void
@@ -18,7 +18,7 @@ abstract class BaseCollection implements Iterator, Countable, JsonSerializable
         next($this->collection);
     }
 
-    final public function key(): string|int|null
+    final public function key(): null|int|string
     {
         return key($this->collection);
     }
@@ -48,21 +48,21 @@ abstract class BaseCollection implements Iterator, Countable, JsonSerializable
         return empty($this->collection);
     }
 
-    public function jsonSerialize(): array
+    final public function jsonSerialize(): array
     {
         $data = [];
         foreach ($this->collection as $element) {
             if (method_exists($element, 'jsonSerialize')) {
                 $data[] = $element->jsonSerialize();
             } else {
-                throw new \DomainException("Methods jsonSerialize not found in " . get_class($element));
+                throw new DomainException('Methods jsonSerialize not found in ' . \get_class($element));
             }
         }
 
         return $data;
     }
 
-    public function sortByAsc(callable $callback, int $options = SORT_REGULAR, bool $descending = false)
+    final public function sortByAsc(callable $callback, int $options = SORT_REGULAR, bool $descending = false)
     {
         $results = [];
 
@@ -80,7 +80,7 @@ abstract class BaseCollection implements Iterator, Countable, JsonSerializable
         return self::createFromArray($results);
     }
 
-    public function sortByDesc(callable $callback, int $options = SORT_REGULAR)
+    final public function sortByDesc(callable $callback, int $options = SORT_REGULAR)
     {
         return $this->sortByAsc($callback, $options, true);
     }

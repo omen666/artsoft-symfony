@@ -5,12 +5,11 @@ declare(strict_types=1);
 namespace App\Car\Query\FindIdentity;
 
 use App\Car\Entity\Car;
+use JsonSerializable;
 
-final class Item implements \JsonSerializable
+final class Item implements JsonSerializable
 {
-    public function __construct(private readonly Car $car)
-    {
-    }
+    public function __construct(private readonly Car $car) {}
 
     public function jsonSerialize(): array
     {

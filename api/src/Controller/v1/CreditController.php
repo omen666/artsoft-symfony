@@ -1,18 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\v1;
 
 use App\Credit\Command\CreateLoan\Command;
 use App\Credit\Command\CreateLoan\Handler;
 use App\Credit\Query\FindByFilter\Fetcher;
 use App\Credit\Query\FindByFilter\Query;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-
-class CreditController extends AbstractController
+final class CreditController extends AbstractController
 {
     #[Route('/api/v1/credit/calculate', methods: ['GET'])]
     public function calculate(Request $request, Fetcher $fetcher): Response
@@ -24,8 +26,8 @@ class CreditController extends AbstractController
 
         try {
             return $this->json($fetcher->fetch($query));
-        } catch (\Exception $e) {
-            return $this->json(["error" => $e->getMessage()], Response::HTTP_BAD_REQUEST);
+        } catch (Exception $e) {
+            return $this->json(['error' => $e->getMessage()], Response::HTTP_BAD_REQUEST);
         }
     }
 
@@ -42,9 +44,9 @@ class CreditController extends AbstractController
         try {
             $handler->handle($command);
 
-            return $this->json(["success" => true]);
-        } catch (\Exception $e) {
-            return $this->json(["success" => false, "error" => $e->getMessage()], Response::HTTP_BAD_REQUEST);
+            return $this->json(['success' => true]);
+        } catch (Exception $e) {
+            return $this->json(['success' => false, 'error' => $e->getMessage()], Response::HTTP_BAD_REQUEST);
         }
     }
 }

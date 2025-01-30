@@ -21,12 +21,12 @@ final class Loan
 
     #[ORM\ManyToOne(targetEntity: Credit::class, inversedBy: 'loans')]
     private Credit $program;
+
     #[ORM\Column(type: 'integer')]
-    private int    $initialPayment;
+    private int $initialPayment;
 
     #[ORM\Column(type: 'integer')]
     private int $loanTerm;
-
 
     public function __construct(
         Car $car,

@@ -31,11 +31,18 @@ api-permissions:
 	docker run --rm -v ${CURDIR}/api:/app -w /app alpine chmod 777 var/cache var/log var/test
 
 api-composer-install:
-#docker-compose run --rm api-php-cli composer install
+	docker-compose run --rm api-php-cli composer install
 
 api-composer-update:
-#docker-compose run --rm api-php-cli composer update
+	docker-compose run --rm api-php-cli composer update
 
 api-migrations:
-#docker-compose run --rm api-php-cli composer app migrations:migrate -- --no-interaction
+	docker-compose run --rm api-php-cli composer app migrations:migrate -- --no-interaction
 
+api-check: api-lint
+
+api-lint:
+	docker-compose run --rm api-php-cli composer php-cs-fixer fix -- --dry-run --diff
+
+api-analyze:
+	docker-compose run --rm api-php-cli composer psalm -- --no-diff

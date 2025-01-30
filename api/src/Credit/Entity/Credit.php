@@ -14,7 +14,7 @@ final class Credit
     #[ORM\Id]
     private int $id;
 
-    #[ORM\Column(type: "decimal", precision: 3, scale: 1)]
+    #[ORM\Column(type: 'decimal', precision: 3, scale: 1)]
     private float $interestRate;
 
     #[ORM\Column(type: 'string', length: 255)]
