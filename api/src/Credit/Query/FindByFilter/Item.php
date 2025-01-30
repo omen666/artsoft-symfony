@@ -9,7 +9,7 @@ use JsonSerializable;
 
 final class Item implements JsonSerializable
 {
-    public function __construct(private readonly Credit $credit)
+    public function __construct(private readonly Credit $credit,private readonly int $monthlyPayment)
     {
     }
 
@@ -18,7 +18,7 @@ final class Item implements JsonSerializable
         return [
             'programId'      => $this->credit->getId(),
             'interestRate'   => $this->credit->getInterestRate(),
-            'monthlyPayment' => $this->credit->getMonthlyPayment(),
+            'monthlyPayment' => $this->monthlyPayment,
             'title'          => $this->credit->getTitle(),
         ];
     }

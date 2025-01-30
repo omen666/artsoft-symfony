@@ -17,16 +17,12 @@ final class Credit
     #[ORM\Column(type: "decimal", precision: 3, scale: 1)]
     private float $interestRate;
 
-    #[ORM\Column(type: 'integer')]
-    private int $monthlyPayment;
-
     #[ORM\Column(type: 'string', length: 255)]
     private string $title;
 
     public function __construct(
         int $id,
         float $interestRate,
-        int $monthlyPayment,
         string $title
     ) {
         $this->id             = $id;
@@ -43,11 +39,6 @@ final class Credit
     public function getInterestRate(): float
     {
         return $this->interestRate;
-    }
-
-    public function getMonthlyPayment(): int
-    {
-        return $this->monthlyPayment;
     }
 
     public function getTitle(): string

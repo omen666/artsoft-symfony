@@ -8,7 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use DomainException;
 
-final class Repository
+final class CreditRepository
 {
     private EntityRepository $repo;
 

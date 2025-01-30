@@ -17,10 +17,10 @@ final class Repository
     public function __construct(EntityManagerInterface $em)
     {
         $this->em   = $em;
-        $this->repo = $em->getRepository(Credit::class);
+        $this->repo = $em->getRepository(Car::class);
     }
 
-    public function get(int $id): Credit
+    public function get(int $id): Car
     {
         $car = $this->repo->find($id);
         if ($car === null) {
