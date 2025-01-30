@@ -28,7 +28,7 @@ api-clear:
 api-init: api-permissions api-composer-install api-migrations
 
 api-permissions:
-	docker run --rm -v ${CURDIR}/api:/app -w /app alpine chmod 777 var/cache var/log var/test
+	docker run --rm -v ${CURDIR}/api:/app -w /app alpine chmod 777 var/cache var/log
 
 api-composer-install:
 	docker-compose run --rm api-php-cli composer install
