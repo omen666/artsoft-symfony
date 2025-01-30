@@ -37,7 +37,7 @@ api-composer-update:
 	docker-compose run --rm api-php-cli composer update
 
 api-migrations:
-	docker-compose run --rm api-php-cli composer app migrations:migrate -- --no-interaction
+	docker-compose run --rm api-php-cli php bin/console doctrine:migrations:migrate --no-interaction
 
 api-check: api-lint
 
